@@ -27,17 +27,17 @@ jobs:
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER notification!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "ready_for_review" ]; then
-            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER notification!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "opened" ]; then
-            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER notification!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "edited" ]; then
-            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER notification!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "reopened" ]; then
-            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER notification!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           else
-            MESSAGE="PR action occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR action notification!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
