@@ -10,11 +10,14 @@ jobs:
   send_notification:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Send Telegram Notification on PR Merge
         id: telegram
         run: |
           # Verificar si el commit es un merge
-          if [[ "${GITHUB_SHA}" != "$(git rev-parse --verify MERGE_HEAD)" ]]; then
+          if [[ ! "$(git log -1 --merges)" ]]; then
             exit 0
           fi
 
