@@ -1,0 +1,62 @@
+name: PR Review Notification
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+    branches:
+      - main
+      - staging
+
+jobs:
+  review_approved:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification on PR Approved
+        id: telegram
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          REVIEWER="${{ github.event.review.user.login }}"
+          MESSAGE="APPROVED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReviewer: $REVIEWER.%0APR URL: $PR_URL"
+          
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=$MESSAGE"
+  
+  review_commented:
+    if: github.event.review.body != null && github.event.review.state == 'commented'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification on PR Commented
+        id: telegram
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          COMMENT="${{ github.event.review.body }}"
+          REVIEWER="${{ github.event.review.user.login }}"
+          MESSAGE="PR COMMENTED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReviewer: $REVIEWER.%0AComment: $COMMENT.%0APR URL: $PR_URL"
+          
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=$MESSAGE"
+  
+  changes_requested:
+    if: github.event.review.state == 'changes_requested'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification on PR Changes Requested
+        id: telegram
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          REVIEWER="${{ github.event.review.user.login }}"
+          MESSAGE="CHANGES REQUESTED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReviewer: $REVIEWER.%0APR URL: $PR_URL"
+          
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=$MESSAGE"
