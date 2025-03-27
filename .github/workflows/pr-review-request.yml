@@ -23,18 +23,19 @@ jobs:
           PR_AUTHOR="${{ github.event.pull_request.user.login }}"
           PR_URL="${{ github.event.pull_request.html_url }}"
           PR_ACTION="${{ github.event.action }}"
+          PR_ACTION_UPPER="${PR_ACTION^^}"  # Convierte el evento a mayúsculas
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="PR review_requested occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "ready_for_review" ]; then
-            MESSAGE="PR ready_for_review occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "opened" ]; then
-            MESSAGE="PR opened occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "edited" ]; then
-            MESSAGE="PR edited occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "reopened" ]; then
-            MESSAGE="PR reopened occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR $PR_ACTION_UPPER occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           else
             MESSAGE="PR action occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           fi
