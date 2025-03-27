@@ -19,24 +19,24 @@ jobs:
       - name: Send Telegram Notification on PR Action
         id: telegram
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}!!%OA%OA"
-          PR_AUTHOR="${{ github.event.pull_request.user.login }}%OA"
-          PR_URL="${{ github.event.pull_request.html_url }}%OA"
-          PR_ACTION="${{ github.event.action }}%OA"
+          PR_TITLE="${{ github.event.pull_request.title }}!!%0A%0A"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}%0A"
+          PR_URL="${{ github.event.pull_request.html_url }}%0A"
+          PR_ACTION="${{ github.event.action }}%0A"
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="Review requested for PR.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR review_requested occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "ready_for_review" ]; then
-            MESSAGE="PR is ready for review.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR ready_for_review occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "opened" ]; then
-            MESSAGE="New PR opened.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR opened occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "edited" ]; then
-            MESSAGE="PR edited.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR edited occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "reopened" ]; then
-            MESSAGE="PR reopened.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR reopened occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           else
-            MESSAGE="PR action occurred.%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR action occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
