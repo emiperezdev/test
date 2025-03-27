@@ -19,7 +19,7 @@ jobs:
       - name: Send Telegram Notification on PR Action
         id: telegram
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_TITLE="${{ github.event.pull_request.title }}!!"
           PR_AUTHOR="${{ github.event.pull_request.user.login }}"
           PR_URL="${{ github.event.pull_request.html_url }}"
           PR_ACTION="${{ github.event.action }}"
