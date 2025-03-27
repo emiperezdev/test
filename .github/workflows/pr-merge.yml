@@ -16,11 +16,16 @@ jobs:
       - name: Send Telegram Notification on PR Merge
         id: telegram
         run: |
-          # Verificar si el commit es un merge
-          if [[ ! "$(git log -1 --merges)" ]]; then
+          # Obtener el mensaje del último commit
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          # Verificar si el mensaje del commit contiene "Merge pull request"
+          if [[ "$COMMIT_MESSAGE" != *"Merge pull request"* ]]; then
+            echo "No es un commit de merge, terminando."
             exit 0
           fi
 
+          # Enviar la notificación de merge
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
           -d "text=PR Merge Notification. Repository: J1Connect. Branch: ${{ github.ref }}. Merge Commit: ${{ github.sha }}. Merge URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
