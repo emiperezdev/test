@@ -19,10 +19,10 @@ jobs:
       - name: Send Telegram Notification on PR Action
         id: telegram
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}!!"
-          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
-          PR_URL="${{ github.event.pull_request.html_url }}"
-          PR_ACTION="${{ github.event.action }}"
+          PR_TITLE="${{ github.event.pull_request.title }}!!%OA%OA"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}%OA"
+          PR_URL="${{ github.event.pull_request.html_url }}%OA"
+          PR_ACTION="${{ github.event.action }}%OA"
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
