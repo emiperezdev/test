@@ -26,7 +26,7 @@ jobs:
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="PR review_requested occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
+            MESSAGE="PR review_requested occurred!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "ready_for_review" ]; then
             MESSAGE="PR ready_for_review occurred!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "opened" ]; then
