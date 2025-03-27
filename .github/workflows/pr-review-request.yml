@@ -1,0 +1,22 @@
+name: PR Review Request Notification
+
+on:
+  pull_request:
+    types:
+      - review_requested
+      - ready_for_review
+    branches:
+      - main
+      - staging
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification on PR Review Request
+        id: telegram
+        run: |
+          
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=PR Review Request Notification. Repository: J1Connect. PR Title: ${{ github.event.pull_request.title }}. PR Author: ${{ github.event.pull_request.user.login }}. PR URL: ${{ github.event.pull_request.html_url }}"
