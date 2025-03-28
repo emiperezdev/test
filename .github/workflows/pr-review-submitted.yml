@@ -68,7 +68,7 @@ jobs:
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "changes_requested" ]; then
-            MESSAGE="Changes Requested!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
+            MESSAGE="CHANGES REQUESTED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
