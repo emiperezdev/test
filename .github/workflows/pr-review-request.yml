@@ -21,21 +21,13 @@ jobs:
           PR_URL="${{ github.event.pull_request.html_url }}"
           PR_ACTION="${{ github.event.action }}"
           PR_ACTION_UPPER="${PR_ACTION^^}"  # Convierte el evento a mayúsculas
-          
-          # Obtener todos los revisores asignados
-          REVIEWERS=""
-          for REVIEWER in "${{ toJson(github.event.requested_reviewers) }}"; do
-            REVIEWERS="$REVIEWERS$REVIEWER, "
-          done
-          # Eliminar la coma y espacio al final de la lista
-          REVIEWERS="${REVIEWERS%, }"
-
+          REVIEWER="${{ github.event.requested_reviewers[0].login }}"  # Primer revisor asignado
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="$PR_ACTION_UPPER!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWERS.%0APR URL: $PR_URL"
+            MESSAGE="$PR_ACTION_UPPER!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWER.%0APR URL: $PR_URL"
           elif [ "$PR_ACTION" == "ready_for_review" ]; then
-            MESSAGE="$PR_ACTION_UPPER!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWERS.%0APR URL: $PR_URL"
+            MESSAGE="$PR_ACTION_UPPER!!%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
