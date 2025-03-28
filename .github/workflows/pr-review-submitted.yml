@@ -21,7 +21,7 @@ jobs:
           MESSAGE_THREAD_ID="2"
 
           if [ "$PR_ACTION" == "approved" ]; then
-            MESSAGE="APPROVED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
+            MESSAGE="APPROVED!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
@@ -40,12 +40,11 @@ jobs:
           PR_AUTHOR="${{ github.event.pull_request.user.login }}"
           PR_URL="${{ github.event.pull_request.html_url }}"
           REVIEW_USER="${{ github.event.review.user.login }}"
-          COMMENT="${{ github.event.review.body }}"
           PR_ACTION="commented"
           MESSAGE_THREAD_ID="2"
 
           if [ "$PR_ACTION" == "commented" ]; then
-            MESSAGE="COMMENTED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0AComment: $COMMENT.%0APR URL: $PR_URL"
+            MESSAGE="COMMENTED!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
@@ -68,7 +67,7 @@ jobs:
           MESSAGE_THREAD_ID="2"
 
           if [ "$PR_ACTION" == "changes_requested" ]; then
-            MESSAGE="CHANGES REQUESTED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
+            MESSAGE="CHANGES REQUESTED!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
