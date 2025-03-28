@@ -21,7 +21,7 @@ jobs:
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "approved" ]; then
-            MESSAGE="Approved!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
+            MESSAGE="APPROVED!!%0A%0ARepository: J1Connect.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview by: $REVIEW_USER.%0APR URL: $PR_URL"
           fi
 
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
