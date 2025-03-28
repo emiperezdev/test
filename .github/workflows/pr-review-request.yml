@@ -22,11 +22,12 @@ jobs:
           PR_ACTION="${{ github.event.action }}"
           PR_ACTION_UPPER="${PR_ACTION^^}"
           REVIEWER="${{ github.event.requested_reviewer.login }}"
+          PR_BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
           MESSAGE_THREAD_ID="2"
 
-          if [ "$PR_ACTION" == "review_requested" ]; then
-            MESSAGE="$PR_ACTION_UPPER!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWER.%0APR URL: $PR_URL"
-          elif [ "$PR_ACTION" == "ready_for_review" ]; then
+          if [ "$PR_BASE_BRANCH" == "main" ]; then
+            MESSAGE="⚠️ WARNING: PR Review Requested to MAIN!!%0A%0AThis is not allowed.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0ARequested Reviewer: $REVIEWER.%0APR URL: $PR_URL"
+          else
             MESSAGE="$PR_ACTION_UPPER!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWER.%0APR URL: $PR_URL"
           fi
 
