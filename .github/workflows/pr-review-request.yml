@@ -21,7 +21,7 @@ jobs:
           PR_URL="${{ github.event.pull_request.html_url }}"
           PR_ACTION="${{ github.event.action }}"
           PR_ACTION_UPPER="${PR_ACTION^^}"  # Convierte el evento a mayúsculas
-          REVIEWER="${{ github.event.requested_reviewers[0].login }}"  # Primer revisor asignado
+          REVIEWER="${{ github.event.requested_reviewer.login }}"  # Primer revisor asignado
           MESSAGE_THREAD_ID="2"  # El ID del hilo del mensaje que deseas usar
 
           if [ "$PR_ACTION" == "review_requested" ]; then
