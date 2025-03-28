@@ -26,7 +26,7 @@ jobs:
           MESSAGE_THREAD_ID="2"
 
           if [ "$PR_BASE_BRANCH" == "main" ]; then
-            MESSAGE="⚠️ WARNING: PR Review Requested to MAIN!!%0A%0AThis is not allowed.%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0ARequested Reviewer: $REVIEWER.%0APR URL: $PR_URL"
+            MESSAGE="⚠️ WARNING: PR Review Requested to MAIN!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0ARequested Reviewer: $REVIEWER.%0APR URL: $PR_URL"
           else
             MESSAGE="$PR_ACTION_UPPER!!%0A%0APR Title: $PR_TITLE.%0APR Author: $PR_AUTHOR.%0AReview By: $REVIEWER.%0APR URL: $PR_URL"
           fi
