@@ -1,19 +1,18 @@
 name: PR Merge Notification
 
 on:
-  push:
-    branches:
-      - main
-      - staging
+  pull_request:
+    types:
+      - closed
 
 jobs:
   send_notification:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'staging'
     runs-on: ubuntu-latest
     steps:
-      - name: Send Telegram Notification on PR Merge
-        id: telegram
+      - name: Send Telegram Notification on PR Merge to Staging
         run: |
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=MERGED!!%0A%0ABranch: ${{ github.ref_name }}.%0AMerge Commit: ${{ github.sha }}.%0AMerge URL: https://github.com/${{ github.repository }}/commit/${{ github.sha }}" \
+          -d "text=MERGED!!%0A%0APR Title: ${{ github.event.pull_request.title }}.%0ABranch: ${{ github.event.pull_request.base.ref }}.%0AMerge Commit: ${{ github.event.pull_request.merge_commit_sha }}.%0AMerge URL: https://github.com/${{ github.repository }}/commit/${{ github.event.pull_request.merge_commit_sha }}" \
           -d "message_thread_id=2"
